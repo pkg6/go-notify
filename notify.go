@@ -3,6 +3,7 @@ package notify
 const (
 	DingTalkName          = "dingtalk"
 	WeworkName            = "wework"
+	MailName              = "mail"
 	RESULT_STATUS_ERROR   = 1
 	RESULT_STATUS_SUCCESS = 0
 )

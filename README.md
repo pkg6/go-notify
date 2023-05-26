@@ -23,6 +23,7 @@ $ go get github.com/pkg6/go-notify
 
 * [钉钉群机器人](https://developers.dingtalk.com/document/app/custom-robot-access)
 * [微信群机器人](https://developer.work.weixin.qq.com/document/path/91770)
+* [邮件](https://github.com/go-gomail/gomail)
 
 
 
@@ -75,6 +76,42 @@ func main() {
 	}
 	message := &wework.TextMessage{}
 	message.Text.Content = "测试发送wework"
+	n := notify.New(client)
+	sender := n.Send(message)
+	for _, result := range sender {
+		fmt.Println(fmt.Sprintf("%#v", result.Result()))
+		fmt.Println(fmt.Sprintf("%#v", result.Status()))
+		fmt.Println(fmt.Sprintf("%#v", result.Error()))
+	}
+}
+```
+</details>
+
+
+
+<details>
+<summary><b>邮件</b></summary>
+
+```
+package main
+
+import (
+	"fmt"
+	"github.com/pkg6/go-notify"
+	"github.com/pkg6/go-notify/mail"
+)
+
+func main() {
+	client := &mail.Client{
+		Host:     "smtp.126.com",
+		Port:     456,
+		Username: "******@126.com",
+		Password: "***************",
+	}
+	message := &mail.Message{}
+	message.SetForm("********@126.com")
+	message.SetTo("**********@qq.com")
+	message.Html("<h3>GO-Notify</h3><p>欢迎使用GO-Notify</p>")
 	n := notify.New(client)
 	sender := n.Send(message)
 	for _, result := range sender {
