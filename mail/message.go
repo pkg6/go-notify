@@ -8,8 +8,8 @@ import (
 type Message struct {
 	Form            string
 	To              []string
-	Cc              string
-	Bcc             string
+	Cc              []string
+	Bcc             []string
 	Subject         string
 	BodyContentType string
 	Body            string
@@ -21,17 +21,15 @@ func (m *Message) SetForm(form string) notify.IMessage {
 	return m
 }
 func (m *Message) SetTo(tos ...string) notify.IMessage {
-	for _, to := range tos {
-		m.To = append(m.To, to)
-	}
+	m.To = tos
 	return m
 }
-func (m *Message) SetCc(cc string) notify.IMessage {
+func (m *Message) SetCc(cc ...string) notify.IMessage {
 	m.Cc = cc
 	return m
 }
 
-func (m *Message) SetBcc(bcc string) notify.IMessage {
+func (m *Message) SetBcc(bcc ...string) notify.IMessage {
 	m.Bcc = bcc
 	return m
 }
@@ -55,8 +53,12 @@ func (m *Message) TransFormToRequestParams() any {
 	message.SetHeader("From", m.Form)
 	message.SetHeader("To", m.To...)
 	message.SetHeader("Subject", m.Subject)
-	message.SetHeader("Cc", m.Cc)
-	message.SetHeader("Bcc", m.Bcc)
+	if len(m.Cc) > 0 {
+		message.SetHeader("Cc", m.Cc...)
+	}
+	if len(m.Bcc) > 0 {
+		message.SetHeader("Bcc", m.Bcc...)
+	}
 	message.SetBody(m.BodyContentType, m.Body)
 	for _, attach := range m.Attach {
 		message.Attach(attach)

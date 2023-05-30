@@ -24,9 +24,9 @@ func (c *Client) Name() string {
 func (c *Client) Send(message notify.IMessage) (result notify.IResult) {
 	result = notify.BuildResult(c.I(), message)
 	params := message.TransFormToRequestParams()
-	if mm, ok := params.(*gomail.Message); ok {
+	if gm, ok := params.(*gomail.Message); ok {
 		d := gomail.NewDialer(c.Host, c.Port, c.Username, c.Password)
-		if err := d.DialAndSend(mm); err != nil {
+		if err := d.DialAndSend(gm); err != nil {
 			result.WithException(err)
 		}
 	} else {
