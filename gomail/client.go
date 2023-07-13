@@ -1,4 +1,4 @@
-package mail
+package gomail
 
 import (
 	"errors"
@@ -18,7 +18,7 @@ func (c *Client) I() notify.IClient {
 }
 
 func (c *Client) Name() string {
-	return notify.MailName
+	return notify.NameGoMail
 }
 
 func (c *Client) Send(message notify.IMessage) (result notify.IResult) {
