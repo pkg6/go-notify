@@ -22,7 +22,7 @@ func (c Client) I() notify.IClient {
 }
 
 func (c Client) Name() string {
-	return notify.NameWework
+	return notify.WeworkName
 }
 
 func (c *Client) url() *url.URL {

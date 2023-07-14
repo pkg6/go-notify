@@ -29,7 +29,7 @@ func (t Client) I() notify.IClient {
 }
 
 func (t Client) Name() string {
-	return notify.NameDingTalk
+	return notify.DingTalkName
 }
 
 func (t *Client) url() *url.URL {

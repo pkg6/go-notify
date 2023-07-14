@@ -24,8 +24,6 @@ $ go get github.com/pkg6/go-notify
 * [钉钉群机器人](https://developers.dingtalk.com/document/app/custom-robot-access)
 * [微信群机器人](https://developer.work.weixin.qq.com/document/path/91770)
 * [邮件](https://github.com/go-gomail/gomail)
-* [SendCloud](https://www.sendcloud.net/doc/email_v2/send_email/)
-* [阿里邮件推送](https://help.aliyun.com/document_detail/29444.html?spm=a2c4g.29443.0.0.342a7bcdte5ZJ9)
 
 
 
@@ -125,62 +123,6 @@ func main() {
 ```
 </details>
 
-
-<details>
-<summary><b>SendCloud</b></summary>
-
-```
-package main
-
-import (
-	"fmt"
-	"github.com/pkg6/go-notify"
-	"github.com/pkg6/go-notify/sendcloudmail"
-)
-
-func main() {
-	client := &sendcloudmail.Client{ApiKey: "", ApiUser: ""}
-	message := sendcloudmail.NewNormalMessage("form-pkg6@github.com", "Go Notify", "to-pkg6@github.com")
-	message.Html("Go Notify")
-	n := notify.New(client)
-	sender := n.Send(message)
-	for _, result := range sender {
-		fmt.Println(fmt.Sprintf("%#v", result.Result()))
-		fmt.Println(fmt.Sprintf("%#v", result.Status()))
-		fmt.Println(fmt.Sprintf("%#v", result.Error()))
-	}
-}
-```
-</details>
-
-
-
-<details>
-<summary><b>SendCloud</b></summary>
-
-```
-package main
-
-import (
-	"fmt"
-	"github.com/pkg6/go-notify"
-	"github.com/pkg6/go-notify/alimail"
-)
-
-func main() {
-	client := &alimail.Client{AccessKeyId: "LTAI5tRMBjU9AGvEtMKC7uhG", AccessKeySecret: "VSgwCwZP5LH673xpks5LeQWOEJHhP2"}
-	message := alimail.NewMailMessage("mail@langai.ai", "Go Notify", "shenghaihuai@hotmail.com")
-	message.HtmlBody("Go Notify")
-	n := notify.New(client)
-	sender := n.Send(message)
-	for _, result := range sender {
-		fmt.Println(fmt.Sprintf("%#v", result.Result()))
-		fmt.Println(fmt.Sprintf("%#v", result.Status()))
-		fmt.Println(fmt.Sprintf("%#v", result.Error()))
-	}
-}
-```
-</details>
 
 ## 自定义客户端
 
