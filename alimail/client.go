@@ -3,7 +3,6 @@ package alimail
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
 	openapi "github.com/alibabacloud-go/darabonba-openapi/v2/client"
 	openapiutil "github.com/alibabacloud-go/openapi-util/service"
 	util "github.com/alibabacloud-go/tea-utils/v2/service"
@@ -89,13 +88,13 @@ func (c *Client) Send(message notify.IMessage) notify.IResult {
 		}
 		api, err := c.aliClient.CallApi(c.commonParams(), request, runtime)
 		if err != nil {
-			fmt.Println(err)
 			result.WithException(err)
-			return nil
+			return result
 		}
 		marshal, err := json.Marshal(api)
 		if err != nil {
-			return nil
+			result.WithException(err)
+			return result
 		}
 		var response Response
 		_ = json.Unmarshal(marshal, &response)

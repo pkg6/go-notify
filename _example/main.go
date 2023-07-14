@@ -76,8 +76,8 @@ func sendCloudMail() {
 }
 
 func alimailSend() {
-	client := &alimail.Client{AccessKeyId: "", AccessKeySecret: ""}
-	message := alimail.NewMailMessage("form-pkg6@github.com", "Go Notify", "to-pkg6@github.com")
+	client := &alimail.Client{AccessKeyId: "LTAI5tRMBjU9AGvEtMKC7uG", AccessKeySecret: "VSgwCwZP5LH673xpks5LeQWOEJHhP2"}
+	message := alimail.NewMailMessage("mail@langai.ai", "Go Notify", "1751212020@qq.com")
 	message.HtmlBody("Go Notify")
 	n := notify.New(client)
 	sender := n.Send(message)

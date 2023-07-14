@@ -8,7 +8,7 @@ import (
 	"net/url"
 )
 
-var SendUrl = "http://api.sendcloud.net/apiv2/mail/send"
+var SendUrl = "https://api.sendcloud.net/apiv2/mail/send"
 
 type Client struct {
 	ApiUser string `json:"api_user"`
