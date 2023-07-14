@@ -3,8 +3,10 @@ package main
 import (
 	"fmt"
 	"github.com/pkg6/go-notify"
+	"github.com/pkg6/go-notify/alimail"
 	"github.com/pkg6/go-notify/dingtalk"
-	"github.com/pkg6/go-notify/mail"
+	"github.com/pkg6/go-notify/gomail"
+	"github.com/pkg6/go-notify/sendcloudmail"
 	"github.com/pkg6/go-notify/wework"
 )
 
@@ -40,13 +42,13 @@ func weworkSend() {
 	}
 }
 func mailSend() {
-	client := &mail.Client{
+	client := &gomail.Client{
 		Host:     "smtp.126.com",
 		Port:     456,
 		Username: "******@126.com",
 		Password: "***************",
 	}
-	message := &mail.Message{}
+	message := &gomail.Message{}
 	message.SetForm("*********@126.com")
 	message.SetTo("**********@qq.com")
 	message.Html("<h3>GO-Notify</h3><p>欢迎使用GO-Notify</p>")
@@ -58,6 +60,35 @@ func mailSend() {
 		fmt.Println(fmt.Sprintf("%#v", result.Error()))
 	}
 }
+
+func sendCloudMail() {
+	client := &sendcloudmail.Client{ApiKey: "", ApiUser: ""}
+	message := sendcloudmail.NewNormalMessage("form-pkg6@github.com", "Go Notify", "to-pkg6@github.com")
+	message.Html("Go Notify")
+	n := notify.New(client)
+	sender := n.Send(message)
+	for _, result := range sender {
+		fmt.Println(fmt.Sprintf("%#v", result.Result()))
+		fmt.Println(fmt.Sprintf("%#v", result.Status()))
+		fmt.Println(fmt.Sprintf("%#v", result.Error()))
+	}
+
+}
+
+func alimailSend() {
+	client := &alimail.Client{AccessKeyId: "", AccessKeySecret: ""}
+	message := alimail.NewMailMessage("form-pkg6@github.com", "Go Notify", "to-pkg6@github.com")
+	message.HtmlBody("Go Notify")
+	n := notify.New(client)
+	sender := n.Send(message)
+	for _, result := range sender {
+		fmt.Println(fmt.Sprintf("%#v", result.Result()))
+		fmt.Println(fmt.Sprintf("%#v", result.Status()))
+		fmt.Println(fmt.Sprintf("%#v", result.Error()))
+	}
+
+}
 func main() {
-	mailSend()
+	//mailSend()
+	alimailSend()
 }

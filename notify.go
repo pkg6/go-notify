@@ -1,9 +1,11 @@
 package notify
 
 const (
-	DingTalkName          = "dingtalk"
-	WeworkName            = "wework"
-	MailName              = "mail"
+	NameDingTalk          = "dingtalk"
+	NameWework            = "wework"
+	NameGoMail            = "gomail"
+	NameSendCloudMail     = "sendcloudmail"
+	NameAliMail           = "alimail"
 	RESULT_STATUS_ERROR   = 1
 	RESULT_STATUS_SUCCESS = 0
 )

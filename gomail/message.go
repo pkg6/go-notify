@@ -1,4 +1,4 @@
-package mail
+package gomail
 
 import (
 	"github.com/pkg6/go-notify"
