@@ -31,13 +31,14 @@ func (n Notify) clone() *Notify {
 }
 
 // Extend 注册自定义网关
-func (n *Notify) Extend(client IClient, names ...string) {
+func (n *Notify) Extend(client IClient, names ...string) *Notify {
 	name := client.Name()
 	if len(names) > 0 {
 		name = names[0]
 	}
 	n.names = append(n.names, name)
 	n.clients[name] = client
+	return &Notify{names: names, clients: n.clients}
 }
 
 // Names 使用别名发送
