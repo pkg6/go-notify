@@ -78,6 +78,7 @@ func sendCloudMail() {
 func alimailSend() {
 	client := &alimail.Client{AccessKeyId: "", AccessKeySecret: ""}
 	message := alimail.NewMailMessage("form-pkg6@github.com", "Go Notify", "to-pkg6@github.com")
+
 	message.HtmlBody("Go Notify")
 	n := notify.New(client)
 	sender := n.Send(message)
@@ -86,9 +87,27 @@ func alimailSend() {
 		fmt.Println(fmt.Sprintf("%#v", result.Status()))
 		fmt.Println(fmt.Sprintf("%#v", result.Error()))
 	}
+}
 
+func nameSend() {
+	client := &dingtalk.Client{
+		AccessToken: "27bbe68cc8b57acc2973b59fd7ae2460fb0b2322ce2e8660f5fb5b75aee04e88",
+		Secret:      "SEC55f77c19089ef4aee0be143a77d12730f2daaa2390b212cffb1e1ac1f23f8ccc",
+	}
+	client2 := &alimail.Client{AccessKeyId: "", AccessKeySecret: ""}
+
+	message := &dingtalk.TextMessage{}
+	message.Text.Content = "测试发送dingtalk2"
+
+	n := notify.New(client, client2)
+	sender := n.Names(notify.NameDingTalk).Send(message)
+	for _, result := range sender {
+		fmt.Println(fmt.Sprintf("%#v", result.Result()))
+		fmt.Println(fmt.Sprintf("%#v", result.Status()))
+		fmt.Println(fmt.Sprintf("%#v", result.Error()))
+	}
 }
 func main() {
 	//mailSend()
-	alimailSend()
+	nameSend()
 }
