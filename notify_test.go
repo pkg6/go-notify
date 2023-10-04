@@ -23,14 +23,14 @@ func TestNotify_Send(t *testing.T) {
 		{
 
 			name:       "wework",
-			clientName: notify.WeworkName,
+			clientName: notify.NameWework,
 			client:     weworkClient,
 			message:    weworkText,
 		},
 		{
 
 			name:       "dingtalk",
-			clientName: notify.DingTalkName,
+			clientName: notify.NameDingTalk,
 			client:     dingTalkClient,
 			message:    dingTalkText,
 		},
