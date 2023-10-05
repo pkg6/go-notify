@@ -11,7 +11,10 @@ const (
 )
 
 func New(clients ...IClient) *Notify {
-	n := new(Notify).clone()
+	n := &Notify{
+		clients: map[string]IClient{},
+		names:   []string{},
+	}
 	for _, client := range clients {
 		n.Extend(client)
 	}
@@ -22,12 +25,6 @@ func New(clients ...IClient) *Notify {
 type Notify struct {
 	names   []string
 	clients map[string]IClient
-}
-
-// 初始化参数
-func (n Notify) clone() *Notify {
-	n.clients = make(map[string]IClient)
-	return &n
 }
 
 // Extend 注册自定义网关
@@ -55,4 +52,14 @@ func (n *Notify) Send(message IMessage) map[string]IResult {
 		}
 	}
 	return results
+}
+
+// SendFirstName 发送
+func (n *Notify) SendFirstName(message IMessage) IResult {
+	name := n.names[0]
+	client, ok := n.clients[name]
+	if !ok {
+		return nil
+	}
+	return client.Send(message)
 }
