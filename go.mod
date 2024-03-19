@@ -7,7 +7,7 @@ require (
 	github.com/alibabacloud-go/openapi-util v0.1.0
 	github.com/alibabacloud-go/tea v1.2.1
 	github.com/alibabacloud-go/tea-utils/v2 v2.0.4
-	github.com/pkg6/go-requests v0.1.0
+	github.com/pkg6/go-requests v0.2.2
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 )
 
